@@ -95,7 +95,7 @@ public abstract class GUIPage {
         return newPage;
     }
 
-    protected GUIPage prepareAndSwitchToPage(int page, GUI main) {
+    protected GUIPage prepareAndSwitchToPage(int page, GUI main) { //TODO clearing text optional
         this.panel.setVisible(false);
         clearAllJTextAreas();
         GUIPage newPage = main.switchToAndReturnPage(page);

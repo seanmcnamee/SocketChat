@@ -56,12 +56,10 @@ public class ListGroupsPage extends GUIPage {
         }
 
         if (obj.equals(this.components[3].component)) {
-            String strPort = ((JTextArea) this.components[2].component).getText().toString();
-            int port = Integer.parseInt(strPort);
-            if (strPort.equals(port+"")) {
-                ((JButton) this.components[this.pages.size()+4].component).setText(strPort);
-                addGroup(port, main);
-            }
+            String groupName = ((JTextArea) this.components[2].component).getText().toString();
+            ((JButton) this.components[this.pages.size()+4].component).setText(groupName);
+            addGroup(groupName, main);
+
             clearAllJTextAreas();
         } else if (obj.equals(this.components[this.components.length-1].component)) {
             System.out.println("Back to menu page");
@@ -69,12 +67,10 @@ public class ListGroupsPage extends GUIPage {
         }
     }
 
-    private void addGroup(int port, GUI main) {
-        ChatPage cP = new ChatPage(port);
+    private void addGroup(String group, GUI main) {
+        ChatPage cP = new ChatPage(group);
         cP.setButtonListeners(main);
 
         this.pages.add(cP);
-        
-
     }
 }
