@@ -2,7 +2,6 @@ package app.GUI.Pages;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.net.Socket;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -18,12 +17,14 @@ public class ChatPage extends GUIPage {
     //Single server system
     private ChatClient chatter;
     
-    private String chatArea = "";
+    private String chatArea = ""; //Just used to fill up the middle text area with messages
 
     public ChatPage(String groupName) {
         super();
         this.panel.setBackground(Color.GRAY);
         ((JLabel) this.components[0].component).setText(groupName);
+
+        //Create and start the ChatClient object for communication with the server.
         chatter = new ChatClient(this, groupName);
         chatter.execute();
     }
@@ -51,12 +52,15 @@ public class ChatPage extends GUIPage {
 
     @Override
     public void actionPerformed(Object obj, GUI main) {
-        if (obj.equals(this.components[3].component)) {
+        
+        if (obj.equals(this.components[3].component)) { //When a message button is sent
             String prefix = "[" + App.name + "] ";
             String message = prefix + ((JTextArea) this.components[2].component).getText().toString();
 
+            //Add the message locally
             addMessage(message, true);
-            //Send message to socket
+
+            //Send message through the socket to server (so it can broadcast it to others)
             chatter.writeToThread(message);
 
             

@@ -4,19 +4,22 @@ import java.io.*;
 import java.net.*;
  
 /**
- * This thread is responsible for reading user's input and send it
- * to the server.
- * It runs in an infinite loop until the user types 'bye' to quit.
+ * This thread is responsible for reading user's input and send it to the server.
+ * Each write call is waiting on the program. That's why it does NOT need a Thread.
  *
  * @author www.codejava.net
+ * @author Altered by Sean McNamee
  */
-public class WriteThread {
+public class Writer {
     private PrintWriter writer;
     private Socket socket;
  
-    public WriteThread(Socket socket) {
+    /**
+     * Instantiate the writer for communication
+     * @param socket
+     */
+    public Writer(Socket socket) {
         this.socket = socket;
- 
         try {
             OutputStream output = socket.getOutputStream();
             writer = new PrintWriter(output, true);
@@ -26,6 +29,9 @@ public class WriteThread {
         }
     }
 
+    /**
+     * Close the socket. Should be called at program termination
+     */
     public void done() {
         try {
             socket.close();
@@ -35,6 +41,10 @@ public class WriteThread {
         }
     }
 
+    /**
+     * Message to be sent through the socket to the server
+     * @param message
+     */
     public void write(String message) {
         writer.println(message);
     }
