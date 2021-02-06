@@ -26,7 +26,7 @@ public class ListGroupsPage extends GUIPage {
         {
             new VariableComponent(new JLabel("Your Groups:", SwingConstants.CENTER), .5, .1, 1, .2),
 
-            new VariableComponent(new JLabel("PORT:", SwingConstants.CENTER), .3, .3, .2, .05),
+            new VariableComponent(new JLabel("GROUP:", SwingConstants.CENTER), .3, .3, .2, .05),
             new VariableComponent(new JTextArea(), .5, .3, .2, .05),
             new VariableComponent(new JButton("Add"), .7, .3, .1, .05),
 
